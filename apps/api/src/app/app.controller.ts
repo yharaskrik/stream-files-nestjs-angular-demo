@@ -23,8 +23,16 @@ export class AppController {
       'Content-Disposition': 'attachment; filename=data.csv',
     });
 
-    // We are piping our `input` (which is our passthrough) into the json2csv transformer and then into the response
-    input.pipe(json2csvTransform).pipe(res);
+    // We are piping our `input` (which is our passthrough) into the json2csv transformer
+    const csvOutputStream = input.pipe(json2csvTransform);
+
+    /*
+     * We now have a stream that will be emitting data for a csv object. This can now be streamed into anything we want
+     * For example you could use the AWS S3 SDK and pipe the stream into an S3 object within a bucket
+     */
+
+    // outputting the csv stream to the response object
+    csvOutputStream.pipe(res);
 
     for (let i = 0; i < 100; i++) {
       // Add data to our input stream which will then go through the json2csv transformer stream then into the response
