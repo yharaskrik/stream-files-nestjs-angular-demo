@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "api": "apps/api",
-    "api-interfaces": "libs/api-interfaces"
+    "api-interfaces": "libs/api-interfaces",
+    "client": "apps/client"
   }
 }

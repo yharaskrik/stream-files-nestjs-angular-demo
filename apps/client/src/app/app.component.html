@@ -1,0 +1,23 @@
+<div *ngIf="downloading$ | async">
+  <!-- Could just as easily show a loading spinner here -->
+  Downloading! Total bytes downloaded so far: {{ totalDownloaded$ | async }}
+</div>
+<div *ngIf="(downloading$ | async) === false">Not Downloading right now.</div>
+
+<button
+  mat-stroked-button
+  color="primary"
+  (click)="download()"
+  [disabled]="downloading$ | async"
+>
+  <div class="spinner-button">
+    <div>
+      <mat-progress-spinner
+        diameter="30"
+        *ngIf="downloading$ | async"
+        mode="indeterminate"
+      ></mat-progress-spinner>
+    </div>
+    <div>Download</div>
+  </div>
+</button>
